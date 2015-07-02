@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 
 namespace AppLib.Data
 {
-    public class Settings : XMLData
+    public class Settings : FileData
     {
         private string m_sCurrentProjectPath = "";
 

@@ -25,13 +25,11 @@ namespace AppLib
         {
             m_projectInfo = new Infos.ProjectInfo(companyName, applicationName);
             m_path = new IO.Path(m_projectInfo);
-            string filename = m_path.APP_DATA;
-            MethodInfo method = settings.GetType().GetMethod("load");
-            MethodInfo genericMethod = method.MakeGenericMethod(settings.GetType());
-            object[] parametersArray = new object[] { sFilename };
-            genericMethod.Invoke(null, parametersArray);
-
-            m_setting = Data.Settings.load<typeof(settings).Name>(filename);
+            string filename = m_path.APP_DATA + "settings.xml";
+            m_setting = settings;
+            m_setting.FILENAME = filename;
+            m_setting.Load();
+            //maintenant il faut load le projet courant sil y en a un
         }
         #endregion
 

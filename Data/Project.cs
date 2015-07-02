@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 
 namespace AppLib.Data
 {
-    public class Project : XMLData
+    public class Project : FileData
     {
         public Project()
         : base()

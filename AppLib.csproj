@@ -41,9 +41,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationManager.cs" />
+    <Compile Include="Data\FileData.cs" />
     <Compile Include="Data\Project.cs" />
     <Compile Include="Data\Settings.cs" />
     <Compile Include="Data\XMLData.cs" />
+    <Compile Include="Formatter\XMLFormatter.cs" />
     <Compile Include="Infos\ProjectInfo.cs" />
     <Compile Include="IO\Path.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
