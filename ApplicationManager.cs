@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using AppLib.Data;
 using System.Reflection;
+using System.IO;
 
 namespace AppLib
 {
@@ -15,7 +16,7 @@ namespace AppLib
         private IO.Path m_path;
         private Infos.ProjectInfo m_projectInfo;
         private Settings m_setting;
-
+        private Project m_project;
         #endregion
 
 
@@ -25,17 +26,19 @@ namespace AppLib
         {
             m_projectInfo = new Infos.ProjectInfo(companyName, applicationName);
             m_path = new IO.Path(m_projectInfo);
-            string filename = m_path.APP_DATA + "settings.xml";
+            string fileName = m_path.APP_DATA + "settings.xml";
             m_setting = settings;
-            m_setting.FILENAME = filename;
-            m_setting.Load();
-            //maintenant il faut load le projet courant sil y en a un
+            m_setting.Load(fileName);
+            loadProject(m_setting.CURRENT_PROJECT_PATH);
         }
         #endregion
 
-        public void load()
+        public void loadProject(string fileName)
         {
-            
+            if (File.Exists(fileName))
+            {
+                m_project.Load(fileName);
+            }
         }
         #region PROPERTIES
 

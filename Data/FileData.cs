@@ -21,8 +21,10 @@ namespace AppLib.Data
          * @return false is load nothing
          * 
          */
-        public bool Load()
+        public bool Load(string sFilename)
         {
+            m_sFilename = sFilename;
+
             if (File.Exists(m_sFilename))
             {
                 MethodInfo method = m_xmlFormatter.GetType().GetMethod("load");
@@ -40,7 +42,7 @@ namespace AppLib.Data
                 }
                 return true;
             }
-            return false
+            return false;
         }
         public void write()
         {
