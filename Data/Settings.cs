@@ -16,7 +16,9 @@ namespace AppLib.Data
         : base()
         {
         }
-
+        /// <summary>
+        /// the current fullname of project
+        /// </summary>
         public string CURRENT_PROJECT_PATH
         {
             get
@@ -27,22 +29,6 @@ namespace AppLib.Data
             {
                 m_sCurrentProjectPath = value;
             }
-        }
-        public bool isCurrentProjectExist()
-        {
-            if (m_sCurrentProjectPath != "")
-            {
-                if (File.Exists(m_sCurrentProjectPath))
-                {
-                    return true;
-                }
-                else
-                {
-                    m_sCurrentProjectPath = "";
-                    this.write();
-                }
-            }
-            return false;
         }
     }
 }

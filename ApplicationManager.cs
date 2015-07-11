@@ -15,13 +15,20 @@ namespace AppLib
 
         private IO.Path m_path;
         private Infos.ProjectInfo m_projectInfo;
-        private Settings m_setting;
+        private Settings m_setting;        
         private Project m_project;
+        
         #endregion
 
 
         #region CONSTRUCTOR
-
+        /// <summary>
+        /// Argument is a base class of Settings and Project that implement variable that you want to serialize
+        /// </summary>
+        /// <param name="settings"></param>
+        /// <param name="project"></param>
+        /// <param name="companyName"></param>
+        /// <param name="applicationName"></param>
         public ApplicationManager(Settings settings, Project project, string companyName, string applicationName)
         {
             m_projectInfo = new Infos.ProjectInfo(companyName, applicationName);
@@ -29,19 +36,51 @@ namespace AppLib
             string fileName = m_path.APP_DATA + "settings.xml";
             m_setting = settings;
             m_setting.Load(fileName);
-            loadProject(m_setting.CURRENT_PROJECT_PATH);
+            m_project = project;
         }
         #endregion
 
-        public void loadProject(string fileName)
+        /// <summary>
+        /// load the project with the current project filename from settings
+        /// </summary>
+        public void loadProject()
         {
-            if (File.Exists(fileName))
-            {
-                m_project.Load(fileName);
-            }
+            Forms.ProgressBarDialog progress = new Forms.ProgressBarDialog();
+            progress.Show();
+            string fileName = m_setting.CURRENT_PROJECT_PATH;
+            m_project.Load(fileName);
+            progress.Close();
+        }
+        /// <summary>
+        /// save the project with the current project filename from settings
+        /// </summary>
+        public void saveProject()
+        {
+            m_project.write();
+        }
+
+        public void addProjectMenuToThisForm(System.Windows.Forms.Form form)
+        {
+
         }
         #region PROPERTIES
 
+        /// <summary>
+        /// This Property store the current project name
+        /// </summary>
+        public string CURRENT_PROJECT_NAME
+        {
+            get
+            {
+                return m_setting.CURRENT_PROJECT_PATH;
+            }
+            set
+            {
+                m_project.FILENAME = value;
+                m_setting.CURRENT_PROJECT_PATH = value;
+            }
+        }
+        
         #endregion
     }
 }

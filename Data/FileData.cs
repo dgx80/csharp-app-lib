@@ -17,13 +17,19 @@ namespace AppLib.Data
         {
             m_xmlFormatter = new XMLFormatter();
         }
-        /**
-         * @return false is load nothing
-         * 
-         */
+        /// <summary>
+        /// Load Data with XMLFormatter
+        /// </summary>
+        /// <value>
+        /// This function try to load this file with the XMLFormatter
+        /// </value>
+        /// <param name="sFilename"></param>
+        /// <returns>
+        /// false is load nothing
+        /// </returns>
         public bool Load(string sFilename)
         {
-            m_sFilename = sFilename;
+            FILENAME = sFilename;
 
             if (File.Exists(m_sFilename))
             {
@@ -44,6 +50,9 @@ namespace AppLib.Data
             }
             return false;
         }
+        /// <summary>
+        /// Write Data with XMLFormatter
+        /// </summary>
         public void write()
         {
             MethodInfo method = m_xmlFormatter.GetType().GetMethod("write");
