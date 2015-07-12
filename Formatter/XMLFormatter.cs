@@ -37,6 +37,11 @@ namespace AppLib.Formatter
 
         public void write<T>(string sFilename, object file)
         {
+            if (sFilename == "")
+            {
+                return;
+            }
+
             XmlSerializer xs = new XmlSerializer(file.GetType());
             using (StreamWriter fw = new StreamWriter(sFilename))
             {

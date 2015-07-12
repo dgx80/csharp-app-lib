@@ -17,7 +17,8 @@ namespace AppLib
         private Infos.ProjectInfo m_projectInfo;
         private Settings m_setting;        
         private Project m_project;
-        
+        private Components.ProjectMenuStrip m_projectMenuStrip;
+
         #endregion
 
 
@@ -61,7 +62,8 @@ namespace AppLib
 
         public void addProjectMenuToThisForm(System.Windows.Forms.Form form)
         {
-
+            m_projectMenuStrip = new Components.ProjectMenuStrip(form);
+            m_projectMenuStrip.createMenuStrip();
         }
         #region PROPERTIES
 
