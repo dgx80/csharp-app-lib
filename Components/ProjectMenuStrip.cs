@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using AppLib.Forms;
 
 namespace AppLib.Components
 {
@@ -14,19 +15,19 @@ namespace AppLib.Components
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem quitToolStripMenuItem;
         private System.Windows.Forms.Form m_form;
-        private ApplicationManager m_applicationManager;
         private string m_sProjectFileExtension;
+        private ApplicationForm m_ApplicationForm;
 
         public ProjectMenuStrip(
-            ApplicationManager applicationManager,
+            ApplicationForm applicationForm,
             System.Windows.Forms.Form form,
             System.Windows.Forms.MenuStrip menuStrip,
             string sProjectFileExtension
             ) 
         {
-            m_applicationManager = applicationManager;
             m_form = form;
             m_sProjectFileExtension = sProjectFileExtension;
+            m_ApplicationForm = applicationForm;
             this.menuStrip1 = menuStrip;
             m_form.ResumeLayout(true);
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -92,23 +93,7 @@ namespace AppLib.Components
         /// <param name="e"></param>
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SaveFileDialog sfd = new SaveFileDialog();
-            sfd.DefaultExt = m_applicationManager.APP_DATA.SETTINGS.getProjectFileExtension();
-            sfd.AddExtension = true;
-            string s = m_applicationManager.APP_DATA.CURRENT_PROJECT_NAME;
-            
-            if (s != "")
-            {
-                System.IO.FileInfo fileInfo = new System.IO.FileInfo(s);
-                if (System.IO.Directory.Exists(fileInfo.DirectoryName))
-                {
-                    sfd.InitialDirectory = fileInfo.DirectoryName;
-                }
-            }
-            if (sfd.ShowDialog() == DialogResult.OK)
-            {
-                m_applicationManager.onNewProjectFile(sfd.FileName);
-            }
+            m_ApplicationForm.OnNewProject();
         }
         /// <summary>
         /// 
@@ -117,7 +102,7 @@ namespace AppLib.Components
         /// <param name="e"></param>
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            m_ApplicationForm.OnOpenProject();
         }
         /// <summary>
         /// 
@@ -126,20 +111,7 @@ namespace AppLib.Components
         /// <param name="e"></param>
         private void quitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
-        }
-        private void getCurrentDirectory()
-        {
-            string s = m_applicationManager.APP_DATA.CURRENT_PROJECT_NAME;
-            string sDirectory = "";
-            if (s != "")
-            {
-                System.IO.FileInfo fileInfo = new System.IO.FileInfo(s);
-                if (System.IO.Directory.Exists(fileInfo.DirectoryName))
-                {
-                    sDirectory = fileInfo.DirectoryName;
-                }
-            }
+            m_ApplicationForm.OnQuitApplication();
         }
     }
 }
