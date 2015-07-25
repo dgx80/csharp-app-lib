@@ -7,6 +7,7 @@ using System.Reflection;
 using System.IO;
 using AppLib.Components;
 using AppLib.Infos;
+using AppLib.Forms;
 
 namespace AppLib
 {
@@ -15,12 +16,9 @@ namespace AppLib
 
         #region VARIABLES
 
-        //private Settings m_setting;        
-        //private Project m_project;
         private ApplicationData m_applicationData;
-        
-        private Components.ProjectMenuStrip m_projectMenuStrip;
         private ApplicationPathInfo m_applicationPathInfo;
+        private ApplicationForm m_applicationForm;
         
         #endregion
 
@@ -49,10 +47,16 @@ namespace AppLib
         /// </summary>
         public void loadProject()
         {
-            Forms.ProgressBarDialog progress = new Forms.ProgressBarDialog();
-            progress.Show();
+            if (APP_FORM !=null)
+            {
+                APP_FORM.onOnload();
+            }
             APP_DATA.onLoad();
-            progress.Close();
+            
+            if (APP_FORM != null)
+            {
+                APP_FORM.onPostload();
+            }
         }
         /// <summary>
         /// save the project with the current project filename from settings
@@ -63,6 +67,14 @@ namespace AppLib
         }
 
         #region PROPERTIES
+
+        public ApplicationForm APP_FORM
+        {
+            get
+            {
+                return m_applicationForm;
+            }
+        }
 
         public ApplicationData APP_DATA
         {
@@ -104,12 +116,11 @@ namespace AppLib
         /// <summary>
         /// add automatically generic mecanic to create, open and close a project file
         /// </summary>
-        /// <param name="form"></param>
+        /// <param name="mainForm"></param>
         /// <param name="menuStrip"></param>
-        public void addProjectMenuStripToThisForm(System.Windows.Forms.Form form, System.Windows.Forms.MenuStrip menuStrip)
+        public void initApplicationForm(System.Windows.Forms.Form mainForm, System.Windows.Forms.MenuStrip menuStrip)
         {
-            string ext = APP_DATA.SETTINGS.getProjectFileExtension();
-            m_projectMenuStrip = new ProjectMenuStrip(this, form, menuStrip, ext);
+            m_applicationForm = new ApplicationForm(this, mainForm, menuStrip);
         }
         #endregion
     }
