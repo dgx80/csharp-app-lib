@@ -10,11 +10,12 @@ namespace AppLib.Data
     public class Settings : FileData
     {
         private string m_sCurrentProjectPath = "";
+        private string m_sProjectFileExtension;
 
-
-        public Settings()
+        public Settings(string sProjectFileExtension = "")
         : base()
         {
+            m_sProjectFileExtension = sProjectFileExtension;
         }
         /// <summary>
         /// the current fullname of project
@@ -29,6 +30,10 @@ namespace AppLib.Data
             {
                 m_sCurrentProjectPath = value;
             }
+        }
+        public string getProjectFileExtension()
+        {
+            return m_sProjectFileExtension;
         }
     }
 }

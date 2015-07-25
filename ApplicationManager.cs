@@ -5,6 +5,8 @@ using System.Text;
 using AppLib.Data;
 using System.Reflection;
 using System.IO;
+using AppLib.Components;
+using AppLib.Infos;
 
 namespace AppLib
 {
@@ -13,12 +15,11 @@ namespace AppLib
 
         #region VARIABLES
 
-        private IO.Path m_path;
-        private Infos.ProjectInfo m_projectInfo;
         private Settings m_setting;        
         private Project m_project;
         private Components.ProjectMenuStrip m_projectMenuStrip;
-
+        private ApplicationPathInfo m_applicationPathInfo;
+        
         #endregion
 
 
@@ -32,9 +33,11 @@ namespace AppLib
         /// <param name="applicationName"></param>
         public ApplicationManager(Settings settings, Project project, string companyName, string applicationName)
         {
-            m_projectInfo = new Infos.ProjectInfo(companyName, applicationName);
-            m_path = new IO.Path(m_projectInfo);
-            string fileName = m_path.APP_DATA + "settings.xml";
+            m_applicationPathInfo = new ApplicationPathInfo(
+                new Infos.ProjectInfo(companyName, applicationName),
+                "settings.xml"
+                );
+            string fileName = APP_PATH_INFO.APP_DATA_INFO.FULL_PATH;
             m_setting = settings;
             m_setting.Load(fileName);
             m_project = project;
@@ -60,12 +63,15 @@ namespace AppLib
             m_project.write();
         }
 
-        public void addProjectMenuToThisForm(System.Windows.Forms.Form form)
-        {
-            m_projectMenuStrip = new Components.ProjectMenuStrip(form);
-            m_projectMenuStrip.createMenuStrip();
-        }
         #region PROPERTIES
+
+        public ApplicationPathInfo APP_PATH_INFO
+        {
+            get
+            {
+                return m_applicationPathInfo;
+            }
+        }
 
         /// <summary>
         /// This Property store the current project name
@@ -83,6 +89,24 @@ namespace AppLib
             }
         }
         
+        #endregion
+
+        #region CALLBACK
+        public void onNewProjectFile(string fileName)
+        {
+            string a = "";
+        }
+        #endregion
+        #region FORM
+        /// <summary>
+        /// add automatically generic mecanic to create, open and close a project file
+        /// </summary>
+        /// <param name="form"></param>
+        /// <param name="menuStrip"></param>
+        public void addProjectMenuStripToThisForm(System.Windows.Forms.Form form, System.Windows.Forms.MenuStrip menuStrip)
+        {
+            m_projectMenuStrip = new ProjectMenuStrip(this, form, menuStrip, m_setting.getProjectFileExtension());
+        }
         #endregion
     }
 }

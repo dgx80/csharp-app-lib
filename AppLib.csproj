@@ -54,8 +54,9 @@
     <Compile Include="Forms\ProgressDialog.Designer.cs">
       <DependentUpon>ProgressDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Infos\ApplicationPathInfo.cs" />
     <Compile Include="Infos\ProjectInfo.cs" />
-    <Compile Include="IO\Path.cs" />
+    <Compile Include="Infos\AppDataInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -13,15 +13,21 @@ namespace AppLib.Components
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem quitToolStripMenuItem;
         private System.Windows.Forms.Form m_form;
+        private ApplicationManager m_applicationManager;
+        private string m_sProjectFileExtension;
 
-        public ProjectMenuStrip(System.Windows.Forms.Form form)
+        public ProjectMenuStrip(
+            ApplicationManager applicationManager,
+            System.Windows.Forms.Form form,
+            System.Windows.Forms.MenuStrip menuStrip,
+            string sProjectFileExtension
+            ) 
         {
+            m_applicationManager = applicationManager;
             m_form = form;
-        }
-        public void createMenuStrip()
-        {
+            m_sProjectFileExtension = sProjectFileExtension;
+            this.menuStrip1 = menuStrip;
             m_form.ResumeLayout(true);
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -54,19 +60,22 @@ namespace AppLib.Components
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
             this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.newToolStripMenuItem.Text = "&new";
-
+            this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.openToolStripMenuItem.Text = "&open";
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
             // quitToolStripMenuItem
             // 
             this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
             this.quitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.quitToolStripMenuItem.Text = "&quit";
+            this.quitToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
+
             m_form.Controls.Add(this.menuStrip1);
             m_form.MainMenuStrip = this.menuStrip1;
             this.menuStrip1.ResumeLayout(false);
@@ -74,6 +83,57 @@ namespace AppLib.Components
             m_form.ResumeLayout(false);
             m_form.PerformLayout();
             this.menuStrip1.Show();
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string s = m_applicationManager.CURRENT_PROJECT_NAME;
+            string sDirectory = "";
+            if (s != "")
+            {
+                System.IO.FileInfo fileInfo = new System.IO.FileInfo(s);
+                if (System.IO.Directory.Exists(fileInfo.DirectoryName))
+                {
+                    sDirectory = fileInfo.DirectoryName;
+                }
+            }
+            m_applicationManager.onNewProjectFile(s);
+
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void quitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void getCurrentDirectory()
+        {
+            string s = m_applicationManager.CURRENT_PROJECT_NAME;
+            string sDirectory = "";
+            if (s != "")
+            {
+                System.IO.FileInfo fileInfo = new System.IO.FileInfo(s);
+                if (System.IO.Directory.Exists(fileInfo.DirectoryName))
+                {
+                    sDirectory = fileInfo.DirectoryName;
+                }
+            }
         }
     }
 }

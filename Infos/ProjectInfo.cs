@@ -5,7 +5,7 @@ using System.Text;
 
 namespace AppLib.Infos
 {
-    class ProjectInfo
+    public class ProjectInfo
     {
         #region VARIABLES
         
