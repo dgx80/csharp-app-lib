@@ -5,6 +5,5 @@
 * faire les dialog dans le AppLib.Components.ProjectMenuStrip
    * new
    * open
-   * save
    * quit    
     
