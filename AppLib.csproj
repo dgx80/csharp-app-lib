@@ -49,6 +49,7 @@
     <Compile Include="Data\Project.cs" />
     <Compile Include="Data\Settings.cs" />
     <Compile Include="Formatter\XMLFormatter.cs" />
+    <Compile Include="Forms\ApplicationForm.cs" />
     <Compile Include="Forms\ProgressDialog.cs">
       <SubType>Form</SubType>
     </Compile>
