@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="ApplicationManager.cs" />
     <Compile Include="Components\ProjectMenuStrip.cs" />
+    <Compile Include="Data\ApplicationData.cs" />
     <Compile Include="Data\FileData.cs" />
     <Compile Include="Data\Project.cs" />
     <Compile Include="Data\Settings.cs" />

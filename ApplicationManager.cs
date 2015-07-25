@@ -15,8 +15,10 @@ namespace AppLib
 
         #region VARIABLES
 
-        private Settings m_setting;        
-        private Project m_project;
+        //private Settings m_setting;        
+        //private Project m_project;
+        private ApplicationData m_applicationData;
+        
         private Components.ProjectMenuStrip m_projectMenuStrip;
         private ApplicationPathInfo m_applicationPathInfo;
         
@@ -37,10 +39,8 @@ namespace AppLib
                 new Infos.ProjectInfo(companyName, applicationName),
                 "settings.xml"
                 );
-            string fileName = APP_PATH_INFO.APP_DATA_INFO.FULL_PATH;
-            m_setting = settings;
-            m_setting.Load(fileName);
-            m_project = project;
+            string settingFileName = APP_PATH_INFO.APP_DATA_INFO.FULL_PATH;
+            m_applicationData = new ApplicationData(settings, project, settingFileName);
         }
         #endregion
 
@@ -51,8 +51,7 @@ namespace AppLib
         {
             Forms.ProgressBarDialog progress = new Forms.ProgressBarDialog();
             progress.Show();
-            string fileName = m_setting.CURRENT_PROJECT_PATH;
-            m_project.Load(fileName);
+            APP_DATA.onLoad();
             progress.Close();
         }
         /// <summary>
@@ -60,10 +59,22 @@ namespace AppLib
         /// </summary>
         public void saveProject()
         {
-            m_project.write();
+            APP_DATA.onSave();
         }
 
         #region PROPERTIES
+
+        public ApplicationData APP_DATA
+        {
+            get
+            {
+                return m_applicationData;
+            }
+            set
+            {
+                m_applicationData = value;
+            }
+        }
 
         public ApplicationPathInfo APP_PATH_INFO
         {
@@ -73,31 +84,23 @@ namespace AppLib
             }
         }
 
-        /// <summary>
-        /// This Property store the current project name
-        /// </summary>
-        public string CURRENT_PROJECT_NAME
-        {
-            get
-            {
-                return m_setting.CURRENT_PROJECT_PATH;
-            }
-            set
-            {
-                m_project.FILENAME = value;
-                m_setting.CURRENT_PROJECT_PATH = value;
-            }
-        }
-        
         #endregion
 
         #region CALLBACK
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fileName"></param>
         public void onNewProjectFile(string fileName)
         {
-            string a = "";
+            APP_DATA.CURRENT_PROJECT_NAME = fileName;
+            APP_DATA.onSave();
         }
         #endregion
+        
         #region FORM
+
         /// <summary>
         /// add automatically generic mecanic to create, open and close a project file
         /// </summary>
@@ -105,7 +108,8 @@ namespace AppLib
         /// <param name="menuStrip"></param>
         public void addProjectMenuStripToThisForm(System.Windows.Forms.Form form, System.Windows.Forms.MenuStrip menuStrip)
         {
-            m_projectMenuStrip = new ProjectMenuStrip(this, form, menuStrip, m_setting.getProjectFileExtension());
+            string ext = APP_DATA.SETTINGS.getProjectFileExtension();
+            m_projectMenuStrip = new ProjectMenuStrip(this, form, menuStrip, ext);
         }
         #endregion
     }

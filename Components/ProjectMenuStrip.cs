@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 
 namespace AppLib.Components
 {
@@ -91,18 +92,23 @@ namespace AppLib.Components
         /// <param name="e"></param>
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string s = m_applicationManager.CURRENT_PROJECT_NAME;
-            string sDirectory = "";
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.DefaultExt = m_applicationManager.APP_DATA.SETTINGS.getProjectFileExtension();
+            sfd.AddExtension = true;
+            string s = m_applicationManager.APP_DATA.CURRENT_PROJECT_NAME;
+            
             if (s != "")
             {
                 System.IO.FileInfo fileInfo = new System.IO.FileInfo(s);
                 if (System.IO.Directory.Exists(fileInfo.DirectoryName))
                 {
-                    sDirectory = fileInfo.DirectoryName;
+                    sfd.InitialDirectory = fileInfo.DirectoryName;
                 }
             }
-            m_applicationManager.onNewProjectFile(s);
-
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                m_applicationManager.onNewProjectFile(sfd.FileName);
+            }
         }
         /// <summary>
         /// 
@@ -124,7 +130,7 @@ namespace AppLib.Components
         }
         private void getCurrentDirectory()
         {
-            string s = m_applicationManager.CURRENT_PROJECT_NAME;
+            string s = m_applicationManager.APP_DATA.CURRENT_PROJECT_NAME;
             string sDirectory = "";
             if (s != "")
             {
