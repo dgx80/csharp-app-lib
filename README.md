@@ -3,7 +3,7 @@
 
 * For the moment it is working at 90%
 
-** Specific Application Settings PROPERTIES class
+## Specific Application Settings PROPERTIES class
     using AppLib.Data;
     
     namespace Met.Data.File
@@ -37,7 +37,7 @@
             #endregion
         }
     }
-** Specific Project PROPERTIES class
+## Specific Project PROPERTIES class
     //do the same thing for the project data propertie that you want to save
     using AppLib.Data;
     
@@ -64,7 +64,7 @@
             #endregion
         }
     }
-** Application instance
+## Application instance
     //define a specific application instance
     namespace Met
     {
@@ -88,7 +88,7 @@
             }
         }
     }
-    
+## Main Form    
     //here in the mainForm
     namespace Met.Forms
     {
