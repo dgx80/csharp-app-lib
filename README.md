@@ -1,8 +1,9 @@
 # csharp-app-lib
-my generic code cross project
+* to start an application with the data serialization as most quickly as possible
 
-For the moment it is working at 90%
+* For the moment it is working at 90%
 
+** Specific Application Settings PROPERTIES class
     using AppLib.Data;
     
     namespace Met.Data.File
@@ -18,6 +19,7 @@ For the moment it is working at 90%
                 : base("met")
             {
             }
+            //pull every propertie that you need here
             #region PROPERTIES
     
             public string SPECIFIC_VALUE
@@ -35,7 +37,7 @@ For the moment it is working at 90%
             #endregion
         }
     }
-
+** Specific Project PROPERTIES class
     //do the same thing for the project data propertie that you want to save
     using AppLib.Data;
     
@@ -44,6 +46,8 @@ For the moment it is working at 90%
         public class MetaliaProject : Project
         {
             private string m_specificValue = "";
+            
+            //pull every propertie that you need here
             #region PROPERTIES
     
             public string SPECIFIC_VALUE
@@ -57,11 +61,10 @@ For the moment it is working at 90%
                     m_specificValue = value;
                 }
             }
-    
             #endregion
         }
     }
-
+** Application instance
     //define a specific application instance
     namespace Met
     {
