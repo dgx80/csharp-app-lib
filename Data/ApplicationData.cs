@@ -28,21 +28,30 @@ namespace AppLib.Data
         /// 
         /// </summary>
         /// <param name="fileName">when you want to load another than the default name in memory</param>
-        public void onLoad(string fileName = "")
+        public void load(string fileName = "")
         {
             if (fileName != "")
             {
                 CURRENT_PROJECT_NAME = fileName;
             }
             m_project.Load(CURRENT_PROJECT_NAME);
+            m_setting.write();
         }
         /// <summary>
         /// 
         /// </summary>
-        public void onSave()
+        public void save()
         {
             m_project.write();
-            m_setting.write();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>true if data changed</returns>
+        public bool isDataChanged()
+        {
+            return m_project.isDataChanged();
         }
         #region PROPERTIES
 

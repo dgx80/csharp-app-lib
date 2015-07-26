@@ -66,11 +66,30 @@ namespace AppLib.Forms
             }
         }
         /// <summary>
-        /// when you duit application
+        /// when you quit application
         /// </summary>
         public void OnQuitApplication()
         {
-
+            bool bClose = true;
+            if (m_applicationManager.APP_DATA.isDataChanged())
+            {
+                DialogResult result = MessageBox.Show("The data is change, do you want to save", "Save", MessageBoxButtons.YesNoCancel);
+                switch (result)
+                {
+                    case DialogResult.Yes:
+                        m_applicationManager.APP_DATA.save();
+                        break;
+                    case DialogResult.No:
+                        break;
+                    case DialogResult.Cancel:
+                        bClose = false;
+                        break;
+                }
+            }
+            if (bClose)
+            {
+                m_form.Close();
+            }
         }
         #endregion
 

@@ -51,7 +51,7 @@ namespace AppLib
             {
                 APP_FORM.onOnload();
             }
-            APP_DATA.onLoad();
+            APP_DATA.load();
             
             if (APP_FORM != null)
             {
@@ -63,7 +63,7 @@ namespace AppLib
         /// </summary>
         public void saveProject()
         {
-            APP_DATA.onSave();
+            APP_DATA.save();
         }
 
         #region PROPERTIES
@@ -107,18 +107,19 @@ namespace AppLib
         public void onNewProjectFile(string fileName)
         {
             load(fileName);
-            APP_DATA.onSave();
+            APP_DATA.save();
         }
 
         public void onOpenProjectFile(string fileName)
         {
             load(fileName);
         }
-
+            
         private void load(string fileName)
         {
-            APP_DATA.onLoad(fileName);
+            APP_DATA.load(fileName);
         }
+
         #endregion
         
         #region FORM
