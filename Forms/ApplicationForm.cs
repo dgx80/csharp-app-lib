@@ -46,7 +46,7 @@ namespace AppLib.Forms
         /// <summary>
         /// when a new project is called..from menustrip of shortcut
         /// </summary>
-        public void OnNewProject()
+        public void onNewProject()
         {
             string fullName = APP_SAVE_FILE_DIALOG.askAFileName();
             if (fullName != "")
@@ -57,9 +57,13 @@ namespace AppLib.Forms
         /// <summary>
         /// when you open a project file
         /// </summary>
-        public void OnOpenProject()
+        public void onOpenProject()
         {
-
+            string fullName = APP_OPEN_FILE_DIALOG.askAFileName();
+            if (fullName != "")
+            {
+                m_applicationManager.onOpenProjectFile(fullName);
+            }
         }
         /// <summary>
         /// when you duit application
@@ -76,9 +80,6 @@ namespace AppLib.Forms
 
         #endregion
 
-        #region ACTIONS
-
-        #endregion
 
         #region PROPERTIES
 
@@ -92,6 +93,15 @@ namespace AppLib.Forms
             }
         }
 
+        public ApplicationOpenFileDialog APP_OPEN_FILE_DIALOG
+        {
+            get
+            {
+                string ext = m_applicationManager.APP_DATA.SETTINGS.getProjectFileExtension();
+                string currentProjectName = m_applicationManager.APP_DATA.CURRENT_PROJECT_NAME;
+                return new ApplicationOpenFileDialog(ext, currentProjectName);
+            }
+        }
         #endregion
 
         #region UTILITY

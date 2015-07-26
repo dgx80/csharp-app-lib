@@ -7,23 +7,12 @@ using System.IO;
 
 namespace AppLib.Forms
 {
-    public class ApplicationSaveFileDialog
+    public class ApplicationSaveFileDialog : ApplicationBaseFileDialog
     {
-        private string m_authorisedEntension;
-        private string m_currentWorkingDirectory = "";
-
-        public ApplicationSaveFileDialog(string authorisedEntension, string currentProjectName = "")
+        public ApplicationSaveFileDialog(string authorisedEntension, string currentFullName = "")
+            : base(authorisedEntension, currentFullName)
         {
-            m_authorisedEntension = authorisedEntension;
-            string s = currentProjectName;
-            if (s != "")
-            {
-                System.IO.FileInfo fileInfo = new System.IO.FileInfo(s);
-                if (System.IO.Directory.Exists(fileInfo.DirectoryName))
-                {
-                    m_currentWorkingDirectory = fileInfo.DirectoryName;
-                }
-            }
+            
         }
         /// <summary>
         /// 
@@ -39,13 +28,13 @@ namespace AppLib.Forms
         {
             string fullName = "";
             SaveFileDialog sfd = new SaveFileDialog();
-            sfd.DefaultExt = m_authorisedEntension;
+            sfd.DefaultExt = EXTENSION;
             sfd.AddExtension = true;
-            sfd.Filter = "Files (*." + m_authorisedEntension + "*)|*." + m_authorisedEntension + "*";
+            sfd.Filter = FILTER;
 
-            if (m_currentWorkingDirectory != "")
+            if (WORKING_DIRECTORY != "")
             {
-                sfd.InitialDirectory = m_currentWorkingDirectory;
+                sfd.InitialDirectory = WORKING_DIRECTORY;
             }
             if (defaultFileName != "")
             {
@@ -57,7 +46,7 @@ namespace AppLib.Forms
                 //validate if the extension is authorised
                 FileInfo fi = new FileInfo(fullName);
                 string currentExtention = fi.Extension;
-                string expectedExtension = "." + m_authorisedEntension;
+                string expectedExtension = "." + EXTENSION;
                 if (currentExtention == expectedExtension)
                 {
                     return fullName;
@@ -65,7 +54,7 @@ namespace AppLib.Forms
                 else
                 {
                     // reload the saveFileDialog with the same name and extention is replaced
-                    MessageBox.Show("only (*." + m_authorisedEntension + ") extention is authorized as project format");
+                    MessageBox.Show("only (*." + EXTENSION + ") extention is authorized as project format");
                     string fileName = fi.Name.Replace(currentExtention, expectedExtension);
                     return askAFileName(fileName);
                 }

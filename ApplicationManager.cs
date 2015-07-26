@@ -106,8 +106,18 @@ namespace AppLib
         /// <param name="fileName"></param>
         public void onNewProjectFile(string fileName)
         {
-            APP_DATA.CURRENT_PROJECT_NAME = fileName;
+            load(fileName);
             APP_DATA.onSave();
+        }
+
+        public void onOpenProjectFile(string fileName)
+        {
+            load(fileName);
+        }
+
+        private void load(string fileName)
+        {
+            APP_DATA.onLoad(fileName);
         }
         #endregion
         

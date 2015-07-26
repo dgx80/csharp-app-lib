@@ -27,9 +27,14 @@ namespace AppLib.Data
         /// <summary>
         /// 
         /// </summary>
-        public void onLoad()
+        /// <param name="fileName">when you want to load another than the default name in memory</param>
+        public void onLoad(string fileName = "")
         {
-            m_project.Load(m_setting.CURRENT_PROJECT_PATH);
+            if (fileName != "")
+            {
+                CURRENT_PROJECT_NAME = fileName;
+            }
+            m_project.Load(CURRENT_PROJECT_NAME);
         }
         /// <summary>
         /// 
@@ -73,7 +78,7 @@ namespace AppLib.Data
             {
                 return m_setting.CURRENT_PROJECT_PATH;
             }
-            set
+            private set
             {
                 m_project.FILENAME = value;
                 m_setting.CURRENT_PROJECT_PATH = value;

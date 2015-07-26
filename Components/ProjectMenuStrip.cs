@@ -69,7 +69,7 @@ namespace AppLib.Components
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.openToolStripMenuItem.Text = "&open";
-            this.openToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // quitToolStripMenuItem
             // 
@@ -93,7 +93,7 @@ namespace AppLib.Components
         /// <param name="e"></param>
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            m_ApplicationForm.OnNewProject();
+            m_ApplicationForm.onNewProject();
         }
         /// <summary>
         /// 
@@ -102,7 +102,7 @@ namespace AppLib.Components
         /// <param name="e"></param>
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            m_ApplicationForm.OnOpenProject();
+            m_ApplicationForm.onOpenProject();
         }
         /// <summary>
         /// 
