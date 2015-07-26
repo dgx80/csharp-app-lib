@@ -61,6 +61,27 @@ namespace AppLib.Data
             genericMethod.Invoke(m_xmlFormatter, parametersArray);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>true if data changed</returns>
+        public bool isDataChanged()
+        {
+            Type type = this.GetType();
+            FileData writtenFileData = (FileData)Activator.CreateInstance(type);
+            writtenFileData.Load(FILENAME);
+            foreach (PropertyInfo mi in type.GetProperties())
+            {
+                object value1 = mi.GetValue(this, null);
+                object value2 = mi.GetValue(writtenFileData, null);
+                if (value1.ToString() != value2.ToString())
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         #region ACCESSORS
 
         public string FILENAME
