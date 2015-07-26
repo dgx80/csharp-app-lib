@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using AppLib.Components;
 using System.Windows.Forms;
+using System.IO;
 
 namespace AppLib.Forms
 {
@@ -14,6 +15,7 @@ namespace AppLib.Forms
         private ApplicationManager m_applicationManager;
         private Components.ProjectMenuStrip m_projectMenuStrip;
         private Forms.ProgressBarDialog m_progressBar;
+        System.Windows.Forms.Form m_form;
 
         #endregion
 
@@ -22,6 +24,7 @@ namespace AppLib.Forms
         
         public ApplicationForm(ApplicationManager applicationManager, System.Windows.Forms.Form form, System.Windows.Forms.MenuStrip menuStrip)
         {
+            m_form = form;
             string ext = applicationManager.APP_DATA.SETTINGS.getProjectFileExtension();
             m_projectMenuStrip = new ProjectMenuStrip(this, form, menuStrip, ext);
             m_progressBar = new Forms.ProgressBarDialog();
@@ -43,11 +46,14 @@ namespace AppLib.Forms
         /// <summary>
         /// when a new project is called..from menustrip of shortcut
         /// </summary>
-        public void OnNewProject()
+        /// <param name="defaultFileName">when you want to load a default file name</param>
+        public void OnNewProject(string defaultFileName = "")
         {
             SaveFileDialog sfd = new SaveFileDialog();
-            sfd.DefaultExt = m_applicationManager.APP_DATA.SETTINGS.getProjectFileExtension();
+            string ext = m_applicationManager.APP_DATA.SETTINGS.getProjectFileExtension();
+            sfd.DefaultExt = ext;
             sfd.AddExtension = true;
+            sfd.Filter = "Files (*." + ext + "*)|*." + ext + "*";
             string s = m_applicationManager.APP_DATA.CURRENT_PROJECT_NAME;
 
             if (s != "")
@@ -58,9 +64,29 @@ namespace AppLib.Forms
                     sfd.InitialDirectory = fileInfo.DirectoryName;
                 }
             }
+            if (defaultFileName != "")
+            {
+                sfd.FileName = defaultFileName;
+            }
             if (sfd.ShowDialog() == DialogResult.OK)
             {
-                m_applicationManager.onNewProjectFile(sfd.FileName);
+                string fullName = sfd.FileName;
+                //validate if the extension is authorised
+                FileInfo fi = new FileInfo(fullName);
+                string currentExtention = fi.Extension;
+                string expectedExtension = "." + ext;
+                if (currentExtention == expectedExtension)
+                {
+                    m_applicationManager.onNewProjectFile(fullName);
+                    return;
+                }
+                else
+                {
+                    // reload the saveFileDialog with the same name and extention is replaced
+                    MessageBox.Show("only (*." + ext + ") extention is authorized as project format");
+                    string fileName = fi.Name.Replace(currentExtention, expectedExtension);
+                    OnNewProject(fileName);
+                }
             }
         }
         /// <summary>
