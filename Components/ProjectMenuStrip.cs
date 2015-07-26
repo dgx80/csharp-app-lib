@@ -76,7 +76,7 @@ namespace AppLib.Components
             this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
             this.quitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.quitToolStripMenuItem.Text = "&quit";
-            this.quitToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
+            this.quitToolStripMenuItem.Click += new System.EventHandler(this.quitToolStripMenuItem_Click);
 
             m_form.Controls.Add(this.menuStrip1);
             m_form.MainMenuStrip = this.menuStrip1;
