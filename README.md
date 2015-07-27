@@ -1,14 +1,22 @@
 # csharp-app-lib
-... to start an application with the data serialization as most quickly as possible
-* Automatic File menu strip to save project data
-... * File->new
-... * File->open
-* you have setting file to store general application data in AppData folder of the application, in the contructuctor you send AppName to be able to organize AppData folder.
-** the map remember the last file loaded and open it automatically 
+
+To start an application with the data serialization as most quickly as possible
+
+1. Automatic File menu strip to administrate specific extention file
+* File, new
+* File, open
+* File, quit
+2. Automatic settings
+* AppData folder of the application is created
+* Remember last project data loaded and reload it at opening
+3.  Data overriding
+* add every Property in your project and setting file of your application.
 
 
-## Specific Project PROPERTIES class
-    //do the same thing for the project data propertie that you want to save
+
+# Specific Project PROPERTIES class
+	//define a specific project properties that wrapped on AppLib.Data.Project
+	//serialized in AppData of your application as xml file
     using AppLib.Data;
     
     namespace Met.Data.File
@@ -35,12 +43,11 @@
         }
     }
 ## (optional) Specific Application Settings PROPERTIES class
-    using AppLib.Data;
-    
+	//define a specific settings properties that wrapped on AppLib.Data.Settings
+    using AppLib.Data; 
     namespace Met.Data.File
     {
-        //define a specific setting propertie that override AppLib.Data.Settings for that be automatically
-        //serialized in AppData of your application as xml file
+
         public class MetaliaSettings : Settings
         {
             private string m_specificValue = "";
@@ -73,7 +80,7 @@
     namespace Met
     {
         /// <summary>
-        /// This class is an Application instance that you override defaut project and setting data
+        /// This class is an Application instance that you inject specific or default project and setting data
         /// </summary>
         public static class Metalia
         {
