@@ -1,7 +1,8 @@
 # csharp-app-lib
 * to start an application with the data serialization as most quickly as possible
-
-* For the moment it is working
+* you have two data file, a project data (with File->new, File->open)
+* you have setting file to store general application data in AppData folder of the application, in the contructuctor you send AppName to be able to organize AppData folder.
+** the map remember the last file loaded and open it automatically 
 
 
 ## Specific Project PROPERTIES class
