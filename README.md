@@ -1,9 +1,37 @@
 # csharp-app-lib
 * to start an application with the data serialization as most quickly as possible
 
-* For the moment it is working at 90%
+* For the moment it is working
 
-## Specific Application Settings PROPERTIES class
+
+## Specific Project PROPERTIES class
+    //do the same thing for the project data propertie that you want to save
+    using AppLib.Data;
+    
+    namespace Met.Data.File
+    {
+        public class MetaliaProject : Project
+        {
+            private string m_specificValue = "";
+            
+            //pull every propertie that you need here
+            #region PROPERTIES
+    
+            public string SPECIFIC_VALUE
+            {
+                get
+                {
+                    return m_specificValue;
+                }
+                set
+                {
+                    m_specificValue = value;
+                }
+            }
+            #endregion
+        }
+    }
+## (optional) Specific Application Settings PROPERTIES class
     using AppLib.Data;
     
     namespace Met.Data.File
@@ -34,33 +62,6 @@
                 }
             }
     
-            #endregion
-        }
-    }
-## Specific Project PROPERTIES class
-    //do the same thing for the project data propertie that you want to save
-    using AppLib.Data;
-    
-    namespace Met.Data.File
-    {
-        public class MetaliaProject : Project
-        {
-            private string m_specificValue = "";
-            
-            //pull every propertie that you need here
-            #region PROPERTIES
-    
-            public string SPECIFIC_VALUE
-            {
-                get
-                {
-                    return m_specificValue;
-                }
-                set
-                {
-                    m_specificValue = value;
-                }
-            }
             #endregion
         }
     }
@@ -99,7 +100,8 @@
                 InitializeComponent();
                 //injection of main form and menuStrip
                 //every action of File: new,open,save,quit is automatically implemented
-                Metalia.APPLICATION_MANAGER.addProjectMenuStripToThisForm(this, menuStrip1);
+                Metalia.APPLICATION_MANAGER.initApplicationForm(this, menuStrip1);
+                Metalia.APPLICATION_MANAGER.loadProject();
             }
         }
     }
