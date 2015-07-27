@@ -1,9 +1,5 @@
 
-#Form
-##create ApplicationForm
-* encapsuler les ApplicationForm(menuStrip seulement pour le moment)
-* faire les dialog dans le AppLib.Components.ProjectMenuStrip
-   * new
-   * open
-   * quit    
+* Faire des shortcut pour new, open
+* Faire des ghost file
+
     
