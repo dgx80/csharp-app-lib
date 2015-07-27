@@ -3,14 +3,14 @@
 To start an application with the data serialization as most quickly as possible
 
 1. Automatic File menu strip to administrate specific extention file
-* File, new
-* File, open
-* File, quit
+  * File, new
+  * File, open
+  * File, quit
 2. Automatic settings
-* AppData folder of the application is created
-* Remember last project data loaded and reload it at opening
+  * AppData folder of the application is created
+  * Remember last project data loaded and reload it at opening
 3.  Data overriding
-* add every Property in your project and setting file of your application.
+  * add every Property in your project and setting file of your application.
 
 
 
