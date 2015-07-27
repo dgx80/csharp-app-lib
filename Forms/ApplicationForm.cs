@@ -15,18 +15,23 @@ namespace AppLib.Forms
         private ApplicationManager m_applicationManager;
         private Components.ProjectMenuStrip m_projectMenuStrip;
         private Forms.ProgressBarDialog m_progressBar;
-        System.Windows.Forms.Form m_form;
+        private ApplicationMainForm m_applicationMainForm;
+        
 
         #endregion
 
         #region CONSTRUCTOR
 
         
-        public ApplicationForm(ApplicationManager applicationManager, System.Windows.Forms.Form form, System.Windows.Forms.MenuStrip menuStrip)
+        public ApplicationForm(
+            ApplicationManager applicationManager,
+            System.Windows.Forms.Form mainForm,
+            System.Windows.Forms.MenuStrip menuStrip
+            ) 
         {
-            m_form = form;
+            m_applicationMainForm = new ApplicationMainForm(this, mainForm);
             string ext = applicationManager.APP_DATA.SETTINGS.getProjectFileExtension();
-            m_projectMenuStrip = new ProjectMenuStrip(this, form, menuStrip, ext);
+            m_projectMenuStrip = new ProjectMenuStrip(this, mainForm, menuStrip, ext);
             m_progressBar = new Forms.ProgressBarDialog();
             m_applicationManager = applicationManager;
         }
@@ -34,11 +39,16 @@ namespace AppLib.Forms
         #endregion
 
         #region EVENTS
-
+        /// <summary>
+        /// 
+        /// </summary>
         public void onOnload()
         {
             m_progressBar.Show();
         }
+        /// <summary>
+        /// 
+        /// </summary>
         public void onPostload()
         {
             m_progressBar.Close();
@@ -65,10 +75,14 @@ namespace AppLib.Forms
                 m_applicationManager.onOpenProjectFile(fullName);
             }
         }
+        #endregion
+
+        #region AUTHORIZATION
         /// <summary>
         /// when you quit application
         /// </summary>
-        public void OnQuitApplication()
+        /// <returns>true if close accepted</returns>
+        public bool isQuitApplicationAccepted()
         {
             bool bClose = true;
             if (m_applicationManager.APP_DATA.isDataChanged())
@@ -86,11 +100,9 @@ namespace AppLib.Forms
                         break;
                 }
             }
-            if (bClose)
-            {
-                m_form.Close();
-            }
+            return bClose;
         }
+
         #endregion
 
         #region UPDATE
@@ -101,6 +113,18 @@ namespace AppLib.Forms
 
 
         #region PROPERTIES
+
+        public ApplicationMainForm APP_MAIN_FORM
+        {
+            get
+            {
+                return m_applicationMainForm;
+            }
+            set
+            {
+                m_applicationMainForm = value;
+            }
+        }
 
         public ApplicationSaveFileDialog APP_SAVE_FILE_DIALOG
         {

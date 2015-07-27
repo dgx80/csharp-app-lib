@@ -111,7 +111,10 @@ namespace AppLib.Components
         /// <param name="e"></param>
         private void quitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            m_ApplicationForm.OnQuitApplication();
+            if (m_ApplicationForm.isQuitApplicationAccepted())
+            {
+                m_ApplicationForm.APP_MAIN_FORM.close();
+            }
         }
     }
 }
