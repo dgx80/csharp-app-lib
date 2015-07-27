@@ -42,7 +42,7 @@ To start an application with the data serialization as most quickly as possible
             #endregion
         }
     }
-## (optional) Specific Application Settings PROPERTIES class
+# (optional) Specific Application Settings PROPERTIES class
 	//define a specific settings properties that wrapped on AppLib.Data.Settings
     using AppLib.Data; 
     namespace Met.Data.File
@@ -75,7 +75,7 @@ To start an application with the data serialization as most quickly as possible
             #endregion
         }
     }
-## Application instance
+# Application instance
     //define a specific application instance
     namespace Met
     {
@@ -99,7 +99,7 @@ To start an application with the data serialization as most quickly as possible
             }
         }
     }
-## Main Form    
+# Main Form    
     //here in the mainForm
     namespace Met.Forms
     {
