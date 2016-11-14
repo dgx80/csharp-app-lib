@@ -42,6 +42,12 @@ namespace AppLib.Formatter
                 return;
             }
 
+            FileInfo fi = new FileInfo(sFilename);
+            if (!fi.Directory.Exists)
+            {
+                System.IO.Directory.CreateDirectory(fi.DirectoryName); 
+            }
+
             XmlSerializer xs = new XmlSerializer(file.GetType());
             using (StreamWriter fw = new StreamWriter(sFilename))
             {
