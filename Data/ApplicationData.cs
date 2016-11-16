@@ -39,6 +39,7 @@ namespace AppLib.Data
         public void save()
         {
             m_project.write();
+            m_setting.write();
         }
 
         /// <summary>
