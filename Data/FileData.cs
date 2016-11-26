@@ -9,7 +9,9 @@ namespace AppLib.Data
     {
         private string m_sFilename = "";
         private XMLFormatter m_xmlFormatter;
+        private string m_sFileType = "";
 
+        
         public FileData()
         {
             m_xmlFormatter = new XMLFormatter();
@@ -93,6 +95,20 @@ namespace AppLib.Data
             }
         }
 
+        /// <summary>
+        /// use to be able to determine what is origin of this file ex: project name data
+        /// </summary>
+        public string FILE_TYPE
+        {
+            get
+            {
+                return m_sFileType;
+            }
+            set
+            {
+                m_sFileType = value;
+            }
+        }
         #endregion
     }
 }

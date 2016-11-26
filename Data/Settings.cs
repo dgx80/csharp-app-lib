@@ -12,10 +12,15 @@ namespace AppLib.Data
         private string m_sCurrentProjectPath = "";
         private string m_sProjectFileExtension;
 
-        public Settings(string sProjectFileExtension = "")
-        : base()
+        /// <summary>
+        /// CONSTRUCTOR
+        /// </summary>
+        /// <param name="sProjectFileExtension"></param>
+        public Settings(string sAppName, string sProjectFileExtension = "")
+            : base()
         {
             m_sProjectFileExtension = sProjectFileExtension;
+            this.FILE_TYPE = sAppName + ".settings";
         }
         /// <summary>
         /// the current fullname of project

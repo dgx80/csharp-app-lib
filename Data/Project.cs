@@ -9,9 +9,11 @@ namespace AppLib.Data
 {
     public class Project : FileData
     {
-        public Project()
-        : base()
+
+        public Project(string sAppName)
+            : base()
         {
+            this.FILE_TYPE = sAppName + ".project";
         }
     }
 }
