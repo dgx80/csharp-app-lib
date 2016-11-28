@@ -48,6 +48,7 @@
     <Compile Include="Data\FileData.cs" />
     <Compile Include="Data\Project.cs" />
     <Compile Include="Data\Settings.cs" />
+    <Compile Include="Data\Builder\VersionBuilder.cs" />
     <Compile Include="Formatter\XMLFormatter.cs" />
     <Compile Include="Forms\ApplicationBaseFileDialog.cs" />
     <Compile Include="Forms\ApplicationForm.cs" />

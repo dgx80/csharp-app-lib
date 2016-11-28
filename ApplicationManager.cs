@@ -103,7 +103,7 @@ namespace AppLib
         public void onNewProjectFile(string fileName)
         {
             load(fileName);
-            APP_DATA.save();
+            saveProject();
         }
 
         public void onOpenProjectFile(string fileName)

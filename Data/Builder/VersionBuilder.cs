@@ -5,7 +5,11 @@ using System.Text;
 
 namespace AppLib.Data
 {
-    class VersionBuilder
+    public class VersionBuilder
     {
+        public string getStringVersion(int major, int minor, int build)
+        {
+            return major.ToString() + "." + minor.ToString() + "." + build.ToString();
+        }
     }
 }

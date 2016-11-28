@@ -75,6 +75,20 @@ namespace AppLib.Forms
                 m_applicationManager.onOpenProjectFile(fullName);
             }
         }
+
+        /// <summary>
+        /// when you open a project file
+        /// </summary>
+        public void onSaveProject()
+        {
+            if (m_applicationManager.APP_DATA.CURRENT_PROJECT_NAME == "")
+            {
+                this.onNewProject();
+                return;
+            }
+            m_applicationManager.saveProject();
+            
+        }
         #endregion
 
         #region AUTHORIZATION
