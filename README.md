@@ -103,7 +103,7 @@ To start an application with the data serialization as most quickly as possible
     //here in the mainForm
     namespace Met.Forms
     {
-        public partial class FormItems : Form
+        public partial class FormItems : AppFormContainer
         {
             public FormItems()
             {
