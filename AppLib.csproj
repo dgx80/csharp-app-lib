@@ -50,8 +50,12 @@
     <Compile Include="Data\Settings.cs" />
     <Compile Include="Data\Builder\VersionBuilder.cs" />
     <Compile Include="Formatter\XMLFormatter.cs" />
+    <Compile Include="Forms\AppFormContainer.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\ApplicationBaseFileDialog.cs" />
     <Compile Include="Forms\ApplicationForm.cs" />
+    <Compile Include="Forms\ApplicationFormInterface.cs" />
     <Compile Include="Forms\ApplicationMainForm.cs" />
     <Compile Include="Forms\ApplicationOpenFileDialog.cs" />
     <Compile Include="Forms\ApplicationSaveFileDialog.cs" />

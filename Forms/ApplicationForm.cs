@@ -8,7 +8,7 @@ using System.IO;
 
 namespace AppLib.Forms
 {
-    public class ApplicationForm
+    public class ApplicationForm : ApplicationFormInterface
     {
         #region ATTRIBUTES
 
@@ -16,7 +16,7 @@ namespace AppLib.Forms
         private Components.ProjectMenuStrip m_projectMenuStrip;
         private Forms.ProgressBarDialog m_progressBar;
         private ApplicationMainForm m_applicationMainForm;
-        
+        private AppFormContainer m_appFormContainer;
 
         #endregion
 
@@ -25,10 +25,11 @@ namespace AppLib.Forms
         
         public ApplicationForm(
             ApplicationManager applicationManager,
-            System.Windows.Forms.Form mainForm,
+            AppFormContainer mainForm,
             System.Windows.Forms.MenuStrip menuStrip
             ) 
         {
+            m_appFormContainer = mainForm;
             m_applicationMainForm = new ApplicationMainForm(this, mainForm);
             string ext = applicationManager.APP_DATA.SETTINGS.getProjectFileExtension();
             m_projectMenuStrip = new ProjectMenuStrip(this, mainForm, menuStrip, ext);
@@ -45,6 +46,7 @@ namespace AppLib.Forms
         public void onOnload()
         {
             m_progressBar.Show();
+            m_appFormContainer.onOnload();
         }
         /// <summary>
         /// 
@@ -52,6 +54,7 @@ namespace AppLib.Forms
         public void onPostload()
         {
             m_progressBar.Close();
+            m_appFormContainer.onPostload();
         }
         /// <summary>
         /// when a new project is called..from menustrip of shortcut
@@ -63,6 +66,7 @@ namespace AppLib.Forms
             {
                 m_applicationManager.onNewProjectFile(fullName);
             }
+            m_appFormContainer.onNewProject();
         }
         /// <summary>
         /// when you open a project file
@@ -74,6 +78,7 @@ namespace AppLib.Forms
             {
                 m_applicationManager.onOpenProjectFile(fullName);
             }
+            m_appFormContainer.onOpenProject();
         }
 
         /// <summary>
@@ -87,7 +92,7 @@ namespace AppLib.Forms
                 return;
             }
             m_applicationManager.saveProject();
-            
+            m_appFormContainer.onSaveProject();
         }
         #endregion
 

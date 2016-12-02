@@ -125,7 +125,7 @@ namespace AppLib
         /// </summary>
         /// <param name="mainForm"></param>
         /// <param name="menuStrip"></param>
-        public void initApplicationForm(System.Windows.Forms.Form mainForm, System.Windows.Forms.MenuStrip menuStrip)
+        public void initApplicationForm(AppLib.Forms.AppFormContainer mainForm, System.Windows.Forms.MenuStrip menuStrip)
         {
             m_applicationForm = new ApplicationForm(this, mainForm, menuStrip);
         }
