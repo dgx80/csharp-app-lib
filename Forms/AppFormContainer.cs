@@ -8,14 +8,14 @@ namespace AppLib.Forms
 {
     public abstract class AppFormContainer : Form, ApplicationFormInterface
     {
-        public void onOnload() { }
+        public virtual void onOnload() { }
 
-        public void onPostload() { }
+        public virtual void onPostload() { }
 
-        public void onNewProject() { }
+        public virtual void onNewProject() { }
 
-        public void onOpenProject() { }
+        public virtual void onOpenProject() { }
 
-        public void onSaveProject() { }
+        public virtual void onSaveProject() { }
     }
 }
