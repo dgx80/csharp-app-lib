@@ -42,7 +42,11 @@ namespace AppLib.Data
                     if (propertyInfo.CanRead)
                     {
                         object value = propertyInfo.GetValue(result, null);
-                        propertyInfo.SetValue(this, value, null);
+
+                        if (propertyInfo.Name != "FILENAME")
+                        {
+                            propertyInfo.SetValue(this, value, null);
+                        }
                     }
                 }
                 return true;
@@ -54,6 +58,10 @@ namespace AppLib.Data
         /// </summary>
         public void write()
         {
+            if (FILENAME == "")
+            {
+                return;
+            }
             MethodInfo method = m_xmlFormatter.GetType().GetMethod("write");
             MethodInfo genericMethod = method.MakeGenericMethod(this.GetType());
             object[] parametersArray = new object[] { m_sFilename, this };

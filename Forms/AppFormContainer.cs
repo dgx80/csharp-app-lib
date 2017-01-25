@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace AppLib.Forms
 {
-    public abstract class AppFormContainer : Form, ApplicationFormInterface
+    public class AppFormContainer : Form, ApplicationFormInterface
     {
         public virtual void onOnload() { }
 
